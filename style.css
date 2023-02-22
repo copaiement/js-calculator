@@ -1,1 +1,115 @@
 /* Stylesheet for JS Calculator */
+body {
+    background-color: lightsalmon;
+    color: darkblue;
+    
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.main-container {
+    background-color: rgb(67, 67, 68);
+    width: 500px;
+    height: 600px;
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-direction: column;
+
+    border: 1px solid yellow;
+
+}
+
+.display {
+    background-color: rgb(83, 41, 6);
+    width: 100%;
+    height: 20%;
+    border: 1px solid red;
+}
+
+.input-container {
+    background-color: rgb(119, 141, 84);
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid purple;
+}
+
+/* css grid test */
+/* .numbers-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 66%;
+    height: 100%;
+    row-gap: 16px;
+    column-gap: 16px;
+
+    border: 1px solid red;
+
+}
+
+.number-btn {
+    background-color: black;
+    color: white;
+    width: auto;
+    height: auto;
+    text-align: center;
+    
+    border: 1px solid purple;
+}
+
+#btn-dot #btn-0 {
+    grid-column-start: 1;
+    
+
+}
+
+#btn-0 {
+    grid-column-end: 4;
+} */
+
+.numbers-panel {
+    display: flex;
+    flex-flow: row wrap;
+    width: 66%;
+    height: 100%;
+    gap: 16px;
+
+    border: 1px solid red;
+
+}
+
+.number-btn {
+    background-color: black;
+    color: white;
+    width: 25%;
+    height: auto;
+    flex-grow: 1;
+    text-align: center;
+    
+    border: 1px solid purple;
+}
+
+.number-btn:hover {
+    background-color: black;
+    scale: 1.05;
+    box-shadow:rgb(83, 41, 6)
+}
+
+.number-btn:active {
+    background-color: red;
+}

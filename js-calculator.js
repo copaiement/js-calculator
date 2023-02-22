@@ -9,18 +9,6 @@ const output = document.getElementById("result");
 let num1;
 let num2;
 
-num1Input.addEventListener("change", () => {
-    num1 = num1Input.value;
-    numsPrint.textContent = `First:${num1} Second:${num2}`;
-
-})
-
-num2Input.addEventListener("change", () => {
-    num2 = num2Input.value;
-    numsPrint.textContent = `First:${num1} Second:${num2}`;
-
-})
-
 //math functions
 
 function add() {
@@ -50,5 +38,7 @@ function divide() {
 //operate function
 
 function operate(operator, num1, num2) {
-    
+
 }
+
+
