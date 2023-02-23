@@ -2,9 +2,10 @@
 
 //setup
 const output = document.querySelector(".display-output");
+//need these values to be global
 let num1 = "";
 let num2 = "";
-let ans = 0;
+let ans = "";
 let operator = "";
 
 //wait for on button to be pressed
@@ -33,37 +34,65 @@ eq.addEventListener("click", operate);
 
 //get number
 function getNum(e) {
-    //if operator is blank we're still on num1
-    if (operator === "") {
-        num1 += e.target.innerText;
-        output.textContent = num1;
-    } else {
+    //if we have an operator and an answer, we're getting num2
+    //and num1 is previous ans
+    if (operator !== "" && ans !=="") {
+        num1 = ans;
         num2 += e.target.innerText;
         output.textContent = num2;
+    //if we have an operator and no answer, we're getting num2
+    //and already have a num1
+    } else if (operator !=="") {
+        num2 += e.target.innerText;
+        output.textContent = num2;
+    //if we have no operator and no answer, we're getting num1
+    } else {
+        num1 += e.target.innerText;
+        output.textContent = num1;
     }
 
-
+    console.log(`num1: ${num1}`);
+    console.log(`operator: ${operator}`);
+    console.log(`num2: ${num2}`);
+    console.log(`ans: ${ans}`);
 }
 //get operator
 function getOper(e) {
-    //if operator is hit while num1 is blank, we're using ans as num1 (initially 0)
+    //if oper is pressed multiple times with no num2 just overwrite
     
-    switch(e.target.innerText) {
-        case "CLR":
-            clear();
-            break;
-        case "%":
-            divide();
-            operate();
-            break;
-        case "X":
-            multiply();
+    //if oper is pressed while we have num1 and num2, we are chaining 
+    //operators so calculate
+
+    //look for CLR
+    if (e.target.innerText === "CLR") {
+        clear();
+    } else {
+        //else set the operator var
+        operator = e.target.innerText;
     }
 }
 
 //operate function
 function operate() {
+    console.log(`Num1: ${num1} Num2: ${num2} Operator: ${operator}`);
     
+    //
+
+
+    switch(operator) {
+        case "%":
+            divide();
+            break;
+        case "X":
+            multiply();
+            break;
+        case "-":
+            subtract();
+            break;
+        case "+":
+            add();
+            break;
+    }
 }
 
 //clear function
@@ -78,27 +107,32 @@ function clear() {
 //math functions
 
 function add() {
-    let result = (+num1 + +num2);
+    ans = (+num1 + +num2);
     output.textContent = `${result}`;
     //return result;
 }
 
 function subtract() {
-    let result = (num1 - num2);
+    ans = (num1 - num2);
     output.textContent = `${result}`;
-    return result;
+
 }
 
 function multiply() {
-    let result = (num1 * num2);
+    ans = (num1 * num2);
     output.textContent = `${result}`;
-    return result;
+
 }
 
 function divide() {
-    let result = (num1 / num2);
-    output.textContent = `${result}`;
-    return result;
+    //catch div 0
+    if (num2 === 0) {
+        return ans = "ERR: DIV 0";
+    } else {
+        ans = (num1 / num2);
+        return ans;
+    }
+
 }
 
 
