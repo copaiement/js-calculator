@@ -5,7 +5,7 @@ const output = document.querySelector(".display-output");
 let num1 = "";
 let num2 = "";
 let ans = 0;
-let operator;
+let operator = "";
 
 //wait for on button to be pressed
 const on = document.getElementById("btn-on");
@@ -27,14 +27,22 @@ on.addEventListener("click", () => {
     output.textContent = 0;
 }, {once: true});
 
-
+//set up equals button
+const eq = document.querySelector("#btn-eq");
+eq.addEventListener("click", operate);
 
 //get number
 function getNum(e) {
     //if operator is blank we're still on num1
-    if (operator === "")
-    num1 += e.target.innerText;
-    output.textContent = num1;
+    if (operator === "") {
+        num1 += e.target.innerText;
+        output.textContent = num1;
+    } else {
+        num2 += e.target.innerText;
+        output.textContent = num2;
+    }
+
+
 }
 //get operator
 function getOper(e) {
@@ -44,14 +52,18 @@ function getOper(e) {
         case "CLR":
             clear();
             break;
-
+        case "%":
+            divide();
+            operate();
+            break;
+        case "X":
+            multiply();
     }
 }
 
 //operate function
-
-function operate(operator, num1, num2) {
-
+function operate() {
+    
 }
 
 //clear function
