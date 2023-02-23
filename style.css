@@ -1,12 +1,14 @@
 /* Stylesheet for JS Calculator */
+@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
+
 body {
     background-color: lightsalmon;
     color: darkblue;
-    
+    font-family: 'Signika', sans-serif;
     width: 100vw;
     height: 100vh;
     margin: 0;
-
+    box-sizing: border-box;
 
     display: flex;
     justify-content: center;
@@ -19,22 +21,41 @@ body {
     background-color: rgb(67, 67, 68);
     width: 500px;
     height: 600px;
-    padding: 32px;
+    border-radius: 8px;
+    border: 32px solid rgb(67, 67, 68);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
     flex-direction: column;
 
-    border: 1px solid yellow;
-
 }
 
 .display {
     background-color: rgb(83, 41, 6);
+    color: rgb(83, 41, 6);;
     width: 100%;
     height: 20%;
+    border-radius: 8px;
     border: 1px solid red;
+    flex-shrink: 1;
+    flex-grow: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.active {
+    background-color: rgb(197, 98, 16);
+    /* box-shadow: 0px 0px 8px 4px rgb(255, 160, 82); */
+    color: rgb(0, 0, 0);
+    transition: .5s;
+}
+
+
+.display-output {
+    margin-right: 16px;
+    font-size: 8vw;
 }
 
 .input-container {
@@ -42,45 +63,14 @@ body {
     width: 100%;
     height: 80%;
     display: flex;
+    flex-shrink: 1;
     flex-direction: row;
     justify-content: space-between;
+    gap: 16px;
     align-items: center;
 
     border: 1px solid purple;
 }
-
-/* css grid test */
-/* .numbers-panel {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 66%;
-    height: 100%;
-    row-gap: 16px;
-    column-gap: 16px;
-
-    border: 1px solid red;
-
-}
-
-.number-btn {
-    background-color: black;
-    color: white;
-    width: auto;
-    height: auto;
-    text-align: center;
-    
-    border: 1px solid purple;
-}
-
-#btn-dot #btn-0 {
-    grid-column-start: 1;
-    
-
-}
-
-#btn-0 {
-    grid-column-end: 4;
-} */
 
 .numbers-panel {
     display: flex;
@@ -89,27 +79,69 @@ body {
     height: 100%;
     gap: 16px;
 
-    border: 1px solid red;
+}
 
+.operators {
+    border: 1px solid yellow;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    gap: 16px;
+}
+
+.number-btn, 
+.oper-btn, 
+#btn-on, 
+#btn-eq {
+    color: white;
+    font-size: 5vh;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.oper-btn, 
+#btn-on, 
+#btn-eq {
+    color: white;
+    font-size: 4vh;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
 }
 
 .number-btn {
     background-color: black;
-    color: white;
     width: 25%;
-    height: auto;
-    flex-grow: 1;
-    text-align: center;
-    
-    border: 1px solid purple;
 }
 
-.number-btn:hover {
-    background-color: black;
+.oper-btn {
+    background-color: rgb(49, 167, 167);
+}
+
+#btn-on,
+#btn-eq {
+    background-color: rgb(233, 141, 88);
+}
+
+.number-btn:hover, 
+.oper-btn:hover, 
+#btn-on:hover, 
+#btn-eq:hover {
     scale: 1.05;
-    box-shadow:rgb(83, 41, 6)
+    cursor: pointer;
 }
 
-.number-btn:active {
+.number-btn:active, 
+.oper-btn:active, 
+#btn-on:active, 
+#btn-eq:active {
     background-color: red;
 }
