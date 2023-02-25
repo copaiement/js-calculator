@@ -56,21 +56,26 @@ function buttonFilter(e) {
 //filter keyboard inputs
 function keyFilter(e) {
     //allowed keys regex
-    const nums = /[\d]/;
-    const opers = /[/*%+xX-]/;
+    const nums = /[.\d]/;
+    const opers = /[+-]/;
+    const multOpers = /[*xX]/;
+    const divOpers = /[/%]/;
     const enter = /[=\bEnter\b]/;
-    const dot = /[.]/;
 
-    if (e.key.match(nums)) {
-        getNum()
-        console.log(e.key);
-        console.log("nums");
-    } else if (e.key.match(opers)) {
-        console.log(e.key);
-        console.log("opers");
-    } else if (e.key.match(enter)) {
-        console.log(e.key);
-        console.log("enter");
+    let input = e.key;
+
+    if (input.match(nums)) {
+        getNum(input);
+    } else if (input.match(opers)) {
+        getOper(input);
+    } else if (input.match(multOpers)) {
+        input = "X";
+        getOper(input);
+    } else if (input.match(divOpers)) {
+        input = "%";
+        getOper(input);
+    } else if (input.match(enter)) {
+        checkEquals();
     }
 }
 
@@ -115,7 +120,7 @@ function getOper(input) {
         clear();
     //if oper is pressed while we have num1 and num2 we are chaining so calculate
     } else if (num1 !== "" && num2 !== "") {
-        operator = e.target.innerText;
+        operator = input;
         operate();
     } else {
         //else set the operator var and move on
