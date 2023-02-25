@@ -68,8 +68,6 @@ body {
     justify-content: space-between;
     gap: 16px;
     align-items: center;
-
-    border: 1px solid purple;
 }
 
 .numbers-panel {
@@ -82,7 +80,6 @@ body {
 }
 
 .operators {
-    border: 1px solid yellow;
     height: 100%;
     flex-grow: 1;
     display: flex;
@@ -95,7 +92,8 @@ body {
 .number-btn, 
 .oper-btn, 
 #btn-on, 
-#btn-eq {
+#btn-eq,
+#btn-dot {
     color: white;
     font-size: 5vh;
     display: flex;
@@ -107,7 +105,8 @@ body {
 
 .oper-btn, 
 #btn-on, 
-#btn-eq {
+#btn-eq,
+#btn-dot {
     color: white;
     font-size: 4vh;
     display: flex;
@@ -117,7 +116,8 @@ body {
     border-radius: 4px;
 }
 
-.number-btn {
+.number-btn,
+#btn-dot {
     background-color: black;
     width: 25%;
 }
@@ -134,7 +134,8 @@ body {
 .number-btn:hover, 
 .oper-btn:hover, 
 #btn-on:hover, 
-#btn-eq:hover {
+#btn-eq:hover,
+#btn-dot:hover {
     scale: 1.05;
     cursor: pointer;
 }
@@ -142,6 +143,7 @@ body {
 .number-btn:active, 
 .oper-btn:active, 
 #btn-on:active, 
-#btn-eq:active {
+#btn-eq:active,
+#btn-dog:active {
     background-color: red;
 }
