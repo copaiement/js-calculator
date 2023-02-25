@@ -2,6 +2,7 @@
 
 //setup
 const output = document.querySelector(".display-output");
+const live = document.querySelector(".live-display");
 const dotBtn = document.getElementById("btn-dot");
 //need these values to be global
 let num1 = "";
@@ -37,6 +38,7 @@ on.addEventListener("click", () => {
     display.classList.add("active");
     //display initial ans value (0)
     output.textContent = ans;
+    live.textContent = "";
 }, {once: true});
 
 //filter button inputs
@@ -46,7 +48,6 @@ function buttonFilter(e) {
     
     //if its not a digit or a . its an operator
     if (input.match(numRegex)) {
-        console.log(input);
         getNum(input);
     } else {
         getOper(input);
@@ -89,12 +90,24 @@ function getNum(input) {
     //and num1 is previous ans
     } else if (operator !== "" && ans !==0) {
         num1 = ans;
+        ans = 0;
         //extra decimal rejection:
         if (input === ".") {
             dotBtn.removeEventListener("click", buttonFilter);
         }
         num2 += input;
         output.textContent = num2;
+        live.textContent = `${num1} ${operator} ${num2}`;
+    //if we have an answer and no operator, we're getting num1 for a new calc
+    } else if (operator === "" && ans !==0) {
+        //extra decimal rejection:
+        if (input === ".") {
+            dotBtn.removeEventListener("click", buttonFilter);
+        }
+        ans = 0;
+        num1 += input;
+        output.textContent = num1;
+        live.textContent = num1;
     //if we have an operator and no answer, we're getting num2
     //and already have a num1
     } else if (operator !=="") {
@@ -103,6 +116,7 @@ function getNum(input) {
         }
         num2 += input;
         output.textContent = num2;
+        live.textContent = `${num1} ${operator} ${num2}`;
     //if we have no operator and no answer, we're getting num1
     } else {
         if (input === ".") {
@@ -110,6 +124,7 @@ function getNum(input) {
         }
         num1 += input;
         output.textContent = num1;
+        live.textContent = num1;
     }
 
 }
@@ -125,8 +140,8 @@ function getOper(input) {
     } else {
         //else set the operator var and move on
         operator = input;
+        live.textContent = `${num1} ${operator}`;
     }
-
     //add decimal event listener back in since we're moving to next number input
     dotBtn.addEventListener("click", buttonFilter);
 }
@@ -135,8 +150,11 @@ function getOper(input) {
 function checkEquals() {
     if (num1 !== "" && num2 === "") {
         ans = num1;
+        num1 = "";
+        operator = "";
     } else if (num1 === "" && ans !== 0) {
         ans = ans;
+        operator = "";
     } else {
         operate();
     }
@@ -144,8 +162,6 @@ function checkEquals() {
 
 //operate function
 function operate() {
-    console.log(`Num1: ${num1} Num2: ${num2} Operator: ${operator}`);
-
     switch(operator) {
         case "%":
             divide();
@@ -167,15 +183,19 @@ function operate() {
     //stop at 11 places
     if (ans.toString().length > 11) {
         output.textContent = "ERR OVRFLW"
+        live.textContent = ""
+    } else if (ans === "ERR: DIV 0") {
+        output.textContent = ans;
+        live.textContent = `${num1} ${operator} ${num2}`;
     } else {
         output.textContent = ans;
+        live.textContent = `${num1} ${operator} ${num2} = ${ans}`;
     }
 
     //reset inputs
     num1 = "";
     num2 = "";
-    //operator = "";
-    console.log(ans);
+    operator = "";
 
 }
 
@@ -186,6 +206,7 @@ function clear() {
     ans = 0;
     operator = "";
     output.textContent = 0;
+    live.textContent = "";
 }
 
 //math functions
