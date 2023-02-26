@@ -135,8 +135,8 @@ function getOper(input) {
         clear();
     //if oper is pressed while we have num1 and num2 we are chaining so calculate
     } else if (num1 !== "" && num2 !== "") {
-        operator = input;
         operate();
+        operator = input;
     } else {
         //else set the operator var and move on
         operator = input;
