@@ -177,19 +177,21 @@ function operate() {
             break;
     }
     
-    //round to two decimals
-    ans = Math.round(ans * 100) / 100;
-
-    //stop at 11 places
-    if (ans.toString().length > 11) {
-        output.textContent = "ERR OVRFLW"
-        live.textContent = ""
-    } else if (ans === "ERR: DIV 0") {
+    //DIV 0
+    if (ans === "ERR: DIV 0") {
         output.textContent = ans;
-        live.textContent = `${num1} ${operator} ${num2}`;
     } else {
-        output.textContent = ans;
-        live.textContent = `${num1} ${operator} ${num2} = ${ans}`;
+        //round to two decimals
+        ans = Math.round(ans * 100) / 100;
+
+        //stop at 11 places
+        if (ans.toString().length > 11) {
+            output.textContent = "ERR OVRFLW"
+            live.textContent = ""
+        } else {
+            output.textContent = ans;
+            live.textContent = `${num1} ${operator} ${num2} = ${ans}`;
+        }
     }
 
     //reset inputs
@@ -205,7 +207,7 @@ function clear() {
     num2 = "";
     ans = 0;
     operator = "";
-    output.textContent = 0;
+    output.textContent = ans;
     live.textContent = "";
 }
 
